@@ -1,0 +1,1 @@
+# Oběšenec_třídy
