@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Oběšenec_třídy;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
@@ -11,10 +12,11 @@ namespace Oběšenec_třídy
     {
         public string VymysliSiSlovo = string.Empty;
         public string VratCastecneOdhaleneSlovo = string.Empty;
-        public string substring = "_";
+        private string substring = "_";
         public int PocetNeuspesnychPokusu = 0;
-        public int PomocnyPocetPokusu = 0;
-        public string[] poleHadanychSlov =
+        public int CelkovyPocetPokusu = 8;
+        bool JePismenoVeSlove = false;
+        private string[] poleHadanychSlov =
         {
             "kočka",
             "pes",
@@ -42,15 +44,13 @@ namespace Oběšenec_třídy
             "sysel",
             "křeček",
         }; //slova, ze kterých se postupně vybírají hádaná slova
-        
-        public void VymysliSiNoveSlovo()
-            {
+
+        public void VymysleneSlovo()
+        {
             Random generatorNahodnychCisel = new Random();
-            int nahodneCislo = generatorNahodnychCisel.Next(24);
-            //Console.WriteLine(nahodneCislo);
+            int nahodneCislo = generatorNahodnychCisel.Next(poleHadanychSlov.Length);
             VymysliSiSlovo = poleHadanychSlov[nahodneCislo]; //náhodně se vygeneruje hádané slovo z pole
-            }
-        
+        }
 
         public void VygenerujCastecneOdhaleneSlovo() //vygeneruje zakryté slovo o stejném počtu znaků.
         {
@@ -58,24 +58,32 @@ namespace Oběšenec_třídy
             {
                 VratCastecneOdhaleneSlovo = VratCastecneOdhaleneSlovo + "_";
             }
-            //Console.WriteLine(VratCastecneOdhaleneSlovo);
+            Console.WriteLine(VratCastecneOdhaleneSlovo);
         }
 
-        public void JePismenoObsazeneVeSlove(Hrac hrac)
+        public bool JePismenoObsazeneVeSlove(char hadanePismeno)
         {
+            JePismenoVeSlove = false;
             for (int j = 0; j < VymysliSiSlovo.Length; j++) // Cyklus kontrolující, zda je zadné písmeno obsaženo v daném slově
             {
-                if (hrac.HadanePismeno == VymysliSiSlovo[j])
+                if (hadanePismeno == VymysliSiSlovo[j])
                 {
                     System.Text.StringBuilder sb = new System.Text.StringBuilder(VratCastecneOdhaleneSlovo);
-                    sb[j] = hrac.HadanePismeno;
+                    sb[j] = hadanePismeno;
                     VratCastecneOdhaleneSlovo = sb.ToString(); //Pokud se uživatel trefí, tak se dané písmeno doplní do hádaného slova
-                }
-                else if (hrac.HadanePismeno != VymysliSiSlovo[j]) //Pokud se uživatel netrefí, tak se navýší pomocná proměnná o 1
-                {
-                    PomocnyPocetPokusu++;
+                    JePismenoVeSlove = true; 
                 }
             }
+            if(!JePismenoVeSlove)
+            {
+                PocetNeuspesnychPokusu++; //Pokud není písmeno v hádaném slově, tak se navýší počet neúspěsných pokusů o 1
+            }
+            return JePismenoVeSlove;
+        }
+
+        public bool JeSlovoUhodnute()
+        {
+            return VratCastecneOdhaleneSlovo.Contains(substring); //kontroluje, zda obsahuje slovo ještě substring "_"
         }
     }
 }
