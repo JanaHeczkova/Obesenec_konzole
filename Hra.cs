@@ -18,7 +18,7 @@ namespace Oběšenec_třídy
             Hrac hrac = new Hrac();
             hadaneSlovo.VymysleneSlovo(); //vygeneruje se hádané slovo
             hadaneSlovo.VygenerujCastecneOdhaleneSlovo(); //vygeneruje se zakryté slovo o stejném počtu znaků
-
+            hadaneSlovo.JeSlovoUhodnute();
 
             while (hadaneSlovo.JeSlovoUhodnute()) //cyklus probíhá dokud není zakryté slovo celé odhalené
             {
