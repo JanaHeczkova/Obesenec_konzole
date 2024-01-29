@@ -16,7 +16,7 @@ namespace Oběšenec_třídy
             Console.WriteLine();
 
             Hrac hrac = new Hrac();
-            hadaneSlovo.VymysleneSlovo(); //vygeneruje se hádané slovo
+            hadaneSlovo.VymysliNoveSlovo(); //vygeneruje se hádané slovo
             hadaneSlovo.VygenerujCastecneOdhaleneSlovo(); //vygeneruje se zakryté slovo o stejném počtu znaků
             hadaneSlovo.JeSlovoUhodnute();
 
@@ -25,7 +25,7 @@ namespace Oběšenec_třídy
                 hrac.ZadejPismeno(); //hráč zadá písmeno
                 hadaneSlovo.JePismenoObsazeneVeSlove(hrac.HadanePismeno); //zkontroluje, zda je písmeno obsažené v hádaném slově
                 Console.Clear();
-                hrac.VratUzZadanaPismena();
+                hrac.VypistUzZadanaPismena();
                 Console.WriteLine(hadaneSlovo.VratCastecneOdhaleneSlovo); //vypíše částečně odhalené slovo
 
                 if (hadaneSlovo.PocetNeuspesnychPokusu == hadaneSlovo.CelkovyPocetPokusu) //Pokud uživatel 5X chyboval, tak se cyklus ukončí
@@ -35,7 +35,7 @@ namespace Oběšenec_třídy
             }
             if (hadaneSlovo.PocetNeuspesnychPokusu == hadaneSlovo.CelkovyPocetPokusu)
             {
-                Console.WriteLine("Bohužel jsi prohrál. Hádané slovo bylo: " + hadaneSlovo.VymysliSiSlovo);
+                Console.WriteLine("Bohužel jsi prohrál. Hádané slovo bylo: " + hadaneSlovo.VymysleneSlovo);
             }
             else
             {

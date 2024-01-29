@@ -19,7 +19,7 @@ namespace Oběšenec_třídy
         ConsoleKeyInfo userInput = Console.ReadKey();
         HadanePismeno = userInput.KeyChar;
         }
-        public void VratUzZadanaPismena()
+        public void VypistUzZadanaPismena()
         {
         UzHadanaPismena = UzHadanaPismena + HadanePismeno;
         Console.WriteLine();

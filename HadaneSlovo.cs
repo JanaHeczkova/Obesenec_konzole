@@ -10,7 +10,7 @@ namespace Oběšenec_třídy
 {
     internal class HadaneSlovo
     {
-        public string VymysliSiSlovo = string.Empty;
+        public string VymysleneSlovo = string.Empty;
         public string VratCastecneOdhaleneSlovo = string.Empty;
         private string substring = "_";
         public int PocetNeuspesnychPokusu = 0;
@@ -45,16 +45,16 @@ namespace Oběšenec_třídy
             "křeček",
         }; //slova, ze kterých se postupně vybírají hádaná slova
 
-        public void VymysleneSlovo()
+        public void VymysliNoveSlovo()
         {
             Random generatorNahodnychCisel = new Random();
             int nahodneCislo = generatorNahodnychCisel.Next(poleHadanychSlov.Length);
-            VymysliSiSlovo = poleHadanychSlov[nahodneCislo]; //náhodně se vygeneruje hádané slovo z pole
+            VymysleneSlovo = poleHadanychSlov[nahodneCislo]; //náhodně se vygeneruje hádané slovo z pole
         }
 
         public void VygenerujCastecneOdhaleneSlovo() //vygeneruje zakryté slovo o stejném počtu znaků.
         {
-            for (int k = 0; k < VymysliSiSlovo.Length; k++)
+            for (int k = 0; k < VymysleneSlovo.Length; k++)
             {
                 VratCastecneOdhaleneSlovo = VratCastecneOdhaleneSlovo + "_";
             }
@@ -64,9 +64,9 @@ namespace Oběšenec_třídy
         public bool JePismenoObsazeneVeSlove(char hadanePismeno)
         {
             JePismenoVeSlove = false;
-            for (int j = 0; j < VymysliSiSlovo.Length; j++) // Cyklus kontrolující, zda je zadné písmeno obsaženo v daném slově
+            for (int j = 0; j < VymysleneSlovo.Length; j++) // Cyklus kontrolující, zda je zadné písmeno obsaženo v daném slově
             {
-                if (hadanePismeno == VymysliSiSlovo[j])
+                if (hadanePismeno == VymysleneSlovo[j])
                 {
                     System.Text.StringBuilder sb = new System.Text.StringBuilder(VratCastecneOdhaleneSlovo);
                     sb[j] = hadanePismeno;
